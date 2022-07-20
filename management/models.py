@@ -19,7 +19,7 @@ class SandoghKhayerieh(models.Model):
     #type
     #status
     #string_date
-    khayer=models.ForeignKey(Khayer)
+    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
     #relation of sandog and khayer???????
 class Assign(models.Model):
     date=models.TimeField(auto_now_add=True)
