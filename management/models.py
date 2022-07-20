@@ -14,16 +14,18 @@ class Khayer(models.Model):
     creating_date=models.TimeField(auto_now_add=True)
     #auto new add for first create
     
-class SandoghKhayrieh(models.Model):
-    #khayer_id
+class SandoghKhayerieh(models.Model):
+    
     #type
     #status
     #string_date
-    pass
+    khayer=models.ForeignKey(Khayer)
+    #relation of sandog and khayer???????
 class Assign(models.Model):
-    #tavilgirandeh_id
-    #sandogh_id
     date=models.TimeField(auto_now_add=True)
+    
+    sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT)
+    tavilgirandeh=models.ForeignKey('TahvilgirandehSandogh',on_delete=models.PROTECT)
     
 class TahvilgirandehSandogh(models.Model):
     first_name=models.CharField(max_length=255,null=False)
@@ -35,10 +37,10 @@ class TahvilgirandehSandogh(models.Model):
     create_date=models.TimeField(null=False,auto_now_add=True)
     
 class Payment(models.Model):
-    #khayer_id
-    #sandogh_id
-    #tahvilgirandeh_id
-    #accunt_id
+    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True)
+    sandogh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True)
+    tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True)
+    hesab_moaseseh=models.ForeignKey('HesabMoaseseh',on_delete=models.PROTECT)
     #admin_id
     amount=models.BigIntegerField(null=False)
     date=models.DateField(auto_now=True)
@@ -59,13 +61,13 @@ class HesabMoaseseh(models.Model):
     """cart number is nullable??"""
 
 class Helping(models.Model):
-    #account_id
-    #madadjo_id
+    hesab_moaseseh=models.ForeignKey(HesabMoaseseh,on_delete=models.PROTECT)
+    madadjo=models.ForeignKey('Madadjo',on_delete=models.PROTECT)
     amount=models.BigIntegerField()
     date=models.DateField(auto_now=True)
     '''date for last modify or create date'''
 
-class madadjo(models.Model):
+class Madadjo(models.Model):
     first_name=models.CharField(max_length=255,null=False)
     last_name=models.CharField(max_length=255,null=False)
     national_code=models.CharField(max_length=10,null=True,unique=True)
