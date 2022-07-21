@@ -78,26 +78,34 @@ class AdminMadadjo(admin.ModelAdmin):
     #ordering=['']
     list_per_page=15
        
-'''
+
 @admin.register(models.TahvilgirandehSandogh)
 class AdminTahvilgirandehSandogh(admin.ModelAdmin):
-    list_display=['']
-    list_editable=['']
+    list_display=['first_name',
+                  'last_name',
+                  'phone_number'
+                  ]
+    #list_editable=['']
     #ordering=['']
     list_per_page=15
 
 @admin.register(models.SandoghKhayerieh)
 class AdminSandoghKhayerieh(admin.ModelAdmin):
-    list_display=['']
-    list_editable=['']
+    list_display=['pk',
+                  'khayer'
+                  ]
+    #list_editable=['']
     #ordering=['']
     list_per_page=15
 
 @admin.register(models.Helping)
 class AdminHelping(admin.ModelAdmin):
-    list_display=['']
-    list_editable=['']
-    #ordering=['']
+    list_display=['madadjo',
+                  'hesab_moaseseh',
+                  'amount',
+                  'date'
+                  ]
+    #list_editable=['']
+    ordering=['date']
     list_per_page=15
 
-'''
