@@ -13,17 +13,21 @@ class Khayer(models.Model):
     #status    
     creating_date=models.TimeField(auto_now_add=True)
     #auto new add for first create
-    
+    def __str__(self) -> str:
+        return self.last_name +" "+ self.first_name
+    class Meta:
+        ordering=['last_name','first_name']
 class SandoghKhayerieh(models.Model):
-    
+    #dont need name or code???
     #type
     #status
     #string_date
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
     #relation of sandog and khayer???????
+    #set __str__ and meta class
+    
 class Assign(models.Model):
     date=models.TimeField(auto_now_add=True)
-    
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT)
     tavilgirandeh=models.ForeignKey('TahvilgirandehSandogh',on_delete=models.PROTECT)
     
@@ -36,6 +40,10 @@ class TahvilgirandehSandogh(models.Model):
     #phone can be null?????
     create_date=models.TimeField(null=False,auto_now_add=True)
     
+    def __str__(self) -> str:
+        return self.last_name +" "+ self.first_name
+    class Meta:
+        ordering=['last_name','first_name']
 class Payment(models.Model):
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True)
     sandogh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True)
@@ -53,12 +61,22 @@ class Payment(models.Model):
     """cart number or account number????"""
     #bank
     description=models.TextField(null=True)
+    
+    def __str__(self) -> str:
+        return self.pk
+    class Meta:
+        ordering=['date']
+        
 class HesabMoaseseh(models.Model):
     name=models.CharField(max_length=255,null=False)
     account_number=models.CharField(max_length=10)
     """account number is nullable??"""
     cart_number=models.CharField(max_length=16)
     """cart number is nullable??"""
+    def __str__(self) -> str:
+        return self.name
+    class Meta:
+        ordering=['name']
 
 class Helping(models.Model):
     hesab_moaseseh=models.ForeignKey(HesabMoaseseh,on_delete=models.PROTECT)
@@ -77,4 +95,8 @@ class Madadjo(models.Model):
     #status    
     creating_date=models.TimeField(auto_now_add=True)
     '''is all nullable??????????'''
+    def __str__(self) -> str:
+        return self.last_name +" "+ self.first_name
+    class Meta:
+        ordering=['last_name','first_name']
     
