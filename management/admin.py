@@ -1,3 +1,4 @@
+from ast import Pass
 from django.contrib import admin
 from . import models
 # Register your models here.
@@ -15,6 +16,12 @@ class AdminKhayer(admin.ModelAdmin):
     list_editable=['first_name']
     #ordering=['']
     list_per_page=15
+    '''
+    @admin.display(ordering=)
+    def sum_of_helps(self,khayer):
+        Pass
+    '''
+    
 '''
 @admin.register(models.HesabMoaseseh)
 class AdminHesabMoaseseh(admin.ModelAdmin):
@@ -22,6 +29,12 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
     list_editable=['']
     #ordering=['']
     list_per_page=15
+    """
+    @admin.display(ordering=)
+    def sum_of_helps(self,khayer):
+        Pass
+    """
+    #sum_of_balance
 
 @admin.register(models.Madadjo)
 class AdminMadadjo(admin.ModelAdmin):
@@ -29,6 +42,12 @@ class AdminMadadjo(admin.ModelAdmin):
     list_editable=['']
     #ordering=['']
     list_per_page=15
+    """
+    @admin.display(ordering=)
+    def sum_of_helps(self,khayer):
+        Pass
+    """
+    
 
 @admin.register(models.TahvilgirandehSandogh)
 class AdminTahvilgirandehSandogh(admin.ModelAdmin):
