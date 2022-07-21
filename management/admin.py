@@ -1,4 +1,5 @@
 from ast import Pass
+from django.db.models import Sum
 from django.contrib import admin
 from . import models
 # Register your models here.
@@ -13,23 +14,28 @@ class AdminPayment(admin.ModelAdmin):
                   'date'
                   ]
     #list_editable=['date']
-    #ordering=['date']
+    ordering=['date']
     list_per_page=15
 
-#@admin.register(models.Khayer)
-#class AdminKhayer(admin.ModelAdmin):
-#    list_display=['pk','first_name']
-#    list_editable=['first_name']
-#    #ordering=['']
-#    list_per_page=15
+@admin.register(models.Khayer)
+class AdminKhayer(admin.ModelAdmin):
+    list_display=['pk',
+                  'last_name',
+                  'first_name',
+                  'phone_number',
+                  'sum_of_helps'
+                  ]
+    #list_editable=['first_name']
+    #ordering=['']
+    list_per_page=15
 
-    '''
-    @admin.display(ordering=)
     def sum_of_helps(self,khayer):
-        Pass
-    '''
+        return khayer.sum_of_helps2
+    def get_queryset(self, request):
+        return super().get_queryset(request).annotate(
+            sum_of_helps2=Sum('payment__amount')
+        )
     
-
 @admin.register(models.HesabMoaseseh)
 class AdminHesabMoaseseh(admin.ModelAdmin):
     list_display=['name']
