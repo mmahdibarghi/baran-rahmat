@@ -49,9 +49,9 @@ class TahvilgirandehSandogh(models.Model):
         ordering=['last_name','first_name']
 
 class Payment(models.Model):
-    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,default=None)
-    sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True,default=None)
-    tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True,default=None)
+    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,default=None,blank=True)
+    sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True,default=None,blank=True)
+    tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True,default=None,blank=True)
     hesab_moaseseh=models.ForeignKey('HesabMoaseseh',on_delete=models.PROTECT)
     #admin_id
     amount=models.BigIntegerField(null=False)
@@ -64,12 +64,13 @@ class Payment(models.Model):
     card_number=models.CharField(max_length=16)
     """cart number or account number????"""
     #bank
-    description=models.TextField(null=True)
+    description=models.TextField(null=True,blank=True)
     
     def __str__(self) -> str:
         return str(self.pk)
     class Meta:
         ordering=['date']
+        
         
 class HesabMoaseseh(models.Model):
     name=models.CharField(max_length=255,null=False)
