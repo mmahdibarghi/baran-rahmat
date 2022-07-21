@@ -55,20 +55,30 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
     #ordering=['']
     list_per_page=15
     
-'''
+
 @admin.register(models.Madadjo)
 class AdminMadadjo(admin.ModelAdmin):
-    list_display=['']
-    list_editable=['']
+    list_display=['first_name',
+                  'last_name',
+                  'national_code',
+                  'sum_of_helped_recived'
+                  ]
+    #list_editable=['']
     #ordering=['']
     list_per_page=15
-    """
-    @admin.display(ordering=)
-    def sum_of_helps(self,khayer):
-        Pass
-    """
-    
+    def sum_of_helped_recived(self,madadjo):
+        return madadjo.sum
+    def get_queryset(self, request):# set fillter for save or pay
 
+        return super().get_queryset(request).annotate(
+            sum=Sum('helping__amount')
+        )
+        
+    #list_editable=['']
+    #ordering=['']
+    list_per_page=15
+       
+'''
 @admin.register(models.TahvilgirandehSandogh)
 class AdminTahvilgirandehSandogh(admin.ModelAdmin):
     list_display=['']
@@ -78,6 +88,13 @@ class AdminTahvilgirandehSandogh(admin.ModelAdmin):
 
 @admin.register(models.SandoghKhayerieh)
 class AdminSandoghKhayerieh(admin.ModelAdmin):
+    list_display=['']
+    list_editable=['']
+    #ordering=['']
+    list_per_page=15
+
+@admin.register(models.Helping)
+class AdminHelping(admin.ModelAdmin):
     list_display=['']
     list_editable=['']
     #ordering=['']
