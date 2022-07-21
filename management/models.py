@@ -24,8 +24,11 @@ class SandoghKhayerieh(models.Model):
     #string_date
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
     #relation of sandog and khayer???????
-    #set __str__ and meta class
-    
+    def __str__(self) -> str:
+        return str(self.pk)
+    class Meta:
+        ordering=['pk']
+
 class Assign(models.Model):
     date=models.TimeField(auto_now_add=True)
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT)
@@ -44,10 +47,11 @@ class TahvilgirandehSandogh(models.Model):
         return self.last_name +" "+ self.first_name
     class Meta:
         ordering=['last_name','first_name']
+
 class Payment(models.Model):
-    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True)
-    sandogh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True)
-    tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True)
+    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,default=None)
+    sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True,default=None)
+    tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True,default=None)
     hesab_moaseseh=models.ForeignKey('HesabMoaseseh',on_delete=models.PROTECT)
     #admin_id
     amount=models.BigIntegerField(null=False)
@@ -63,7 +67,7 @@ class Payment(models.Model):
     description=models.TextField(null=True)
     
     def __str__(self) -> str:
-        return self.pk
+        return str(self.pk)
     class Meta:
         ordering=['date']
         
