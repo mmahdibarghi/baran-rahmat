@@ -38,16 +38,23 @@ class AdminKhayer(admin.ModelAdmin):
     
 @admin.register(models.HesabMoaseseh)
 class AdminHesabMoaseseh(admin.ModelAdmin):
-    list_display=['name']
+    list_display=['name',
+                  'account_number',
+                  'cart_number',
+                  'sum_of_balance'
+                  ]
+    def sum_of_balance(self,hesab_moaseseh):
+        return hesab_moaseseh.sum
+    def get_queryset(self, request):# set fillter for save or pay
+
+        return super().get_queryset(request).annotate(
+            sum=Sum('payment__amount')
+        )
+        
     #list_editable=['']
     #ordering=['']
     list_per_page=15
-    """
-    @admin.display(ordering=)
-    def sum_of_helps(self,khayer):
-        Pass
-    """
-    #sum_of_balance
+    
 '''
 @admin.register(models.Madadjo)
 class AdminMadadjo(admin.ModelAdmin):
