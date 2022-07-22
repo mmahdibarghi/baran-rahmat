@@ -6,11 +6,10 @@ class Khayer(models.Model):
     first_name=models.CharField(max_length=255,null=False)
     last_name=models.CharField(max_length=255,null=False)
     national_code=models.CharField(max_length=10,null=True,unique=True)
-    #national code can be null????/ yes
     phone_number=models.CharField(max_length=12,null=True)
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
-    #status    
+    #status active nunactive moalagh
     creating_date=models.TimeField(auto_now_add=True)
     #auto new add for first create
     def __str__(self) -> str:
@@ -20,7 +19,7 @@ class Khayer(models.Model):
 class SandoghKhayerieh(models.Model):
     #dont need name or code??? id is enouph
     #code
-    #type
+    #type   pelastiki
     #status
     #strting_date
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
@@ -57,7 +56,7 @@ class Payment(models.Model):
     amount=models.BigIntegerField(null=False)
     date=models.DateField(auto_now=True)
     '''date for last modify or create date'''
-    #type
+    #type   by_cart cash 
     #authority
     #ref_code
     #has_paid
@@ -91,15 +90,22 @@ class Helping(models.Model):
     '''date for create date'''
 
 class Madadjo(models.Model):
+    ACTIVE='AC'
+    INACTIVE='IN'
+    UNKNOWN='NU'
+    choices_status=[
+        (ACTIVE,'Active'),
+        (INACTIVE,'Inactive'),
+        (UNKNOWN,'Unknown')            
+                    ]
     first_name=models.CharField(max_length=255,null=False)
     last_name=models.CharField(max_length=255,null=False)
     national_code=models.CharField(max_length=10,null=True,unique=True)
     phone_number=models.CharField(max_length=12,null=True)
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
-    #status    
+    status=models.CharField(max_length=10,choices=choices_status,default=UNKNOWN)
     creating_date=models.TimeField(auto_now_add=True)
-    '''is all nullable??????????'''
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
     class Meta:

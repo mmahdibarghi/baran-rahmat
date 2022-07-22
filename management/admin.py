@@ -61,6 +61,7 @@ class AdminMadadjo(admin.ModelAdmin):
     list_display=['first_name',
                   'last_name',
                   'national_code',
+                  'status',
                   'sum_of_helped_recived'
                   ]
     #list_editable=['']
