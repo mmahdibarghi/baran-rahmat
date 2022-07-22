@@ -6,7 +6,7 @@ class Khayer(models.Model):
     first_name=models.CharField(max_length=255,null=False)
     last_name=models.CharField(max_length=255,null=False)
     national_code=models.CharField(max_length=10,null=True,unique=True)
-    #national code can be null????/
+    #national code can be null????/ yes
     phone_number=models.CharField(max_length=12,null=True)
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
@@ -18,10 +18,11 @@ class Khayer(models.Model):
     class Meta:
         ordering=['last_name','first_name']
 class SandoghKhayerieh(models.Model):
-    #dont need name or code???
+    #dont need name or code??? id is enouph
+    #code
     #type
     #status
-    #string_date
+    #strting_date
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
     #relation of sandog and khayer???????
     def __str__(self) -> str:
@@ -38,9 +39,8 @@ class TahvilgirandehSandogh(models.Model):
     first_name=models.CharField(max_length=255,null=False)
     last_name=models.CharField(max_length=255,null=False)
     national_code=models.CharField(max_length=10,null=True,unique=True)
-    # national code can be null??????
+    # national code can be null?????? yes
     phone_number=models.CharField(max_length=12,null=False)
-    #phone can be null?????
     create_date=models.TimeField(null=False,auto_now_add=True)
     
     def __str__(self) -> str:
@@ -63,7 +63,7 @@ class Payment(models.Model):
     #has_paid
     card_number=models.CharField(max_length=16)
     """cart number or account number????"""
-    #bank
+    #bank khayer
     description=models.TextField(null=True,blank=True)
     
     def __str__(self) -> str:
@@ -75,9 +75,9 @@ class Payment(models.Model):
 class HesabMoaseseh(models.Model):
     name=models.CharField(max_length=255,null=False)
     account_number=models.CharField(max_length=10)
-    """account number is nullable??"""
+    
     cart_number=models.CharField(max_length=16)
-    """cart number is nullable??"""
+    
     def __str__(self) -> str:
         return self.name
     class Meta:
@@ -88,7 +88,7 @@ class Helping(models.Model):
     madadjo=models.ForeignKey('Madadjo',on_delete=models.PROTECT)
     amount=models.BigIntegerField()
     date=models.DateField(auto_now=True)
-    '''date for last modify or create date'''
+    '''date for create date'''
 
 class Madadjo(models.Model):
     first_name=models.CharField(max_length=255,null=False)
