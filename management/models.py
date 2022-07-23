@@ -34,10 +34,10 @@ class SandoghKhayerieh(models.Model):
         (INACTIVE,'Inactive'),
         (UNKNOWN,'Unknown')            
                     ]
-    code=models.CharField(max_length=255)
+    code=models.CharField(max_length=255,unique=True)
     typee=models.CharField(max_length=8,choices=type_choices)
     status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
-    strting_date=models.DateField(auto_now_add=True)
+    strting_date=models.TimeField(auto_now_add=True)
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
         return str(self.pk)
