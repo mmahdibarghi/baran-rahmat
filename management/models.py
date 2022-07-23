@@ -15,13 +15,30 @@ class Khayer(models.Model):
     class Meta:
         ordering=['last_name','first_name']
 class SandoghKhayerieh(models.Model):
-    #dont need name or code??? id is enouph
-    #code
-    #type   pelastiki
-    #status
-    #strting_date
-    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT)
-    #relation of sandog and khayer???????
+    PLASTICB='PLASTICB'
+    PLASTICS='PLASTICS'
+    FELEZIB='FELEZIB'
+    FELEZIS='FELEZIS'
+    type_choices=[
+        (PLASTICB,'PlasticBig'),
+        (PLASTICS,'PlasticBig'),
+        (FELEZIB,'FeleziBig'),
+        (FELEZIS,'FeleziSmall'),
+        
+    ]
+    ACTIVE='ACTIVE'
+    INACTIVE='INACTIVE'
+    UNKNOWN='NUKKNOW'
+    choices_status=[
+        (ACTIVE,'Active'),
+        (INACTIVE,'Inactive'),
+        (UNKNOWN,'Unknown')            
+                    ]
+    code=models.CharField(max_length=255)
+    typee=models.CharField(max_length=8,choices=type_choices)
+    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
+    strting_date=models.DateField(auto_now_add=True)
+    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
         return str(self.pk)
     class Meta:
@@ -62,7 +79,6 @@ class Payment(models.Model):
     amount=models.BigIntegerField(null=False)
     date=models.DateField(auto_now=True)
     '''date for last modify or create date'''
-    #type   by_cart cash 
     typee=models.CharField(max_length=7,choices=typechoice,default=CASH,null=True)
     #authority
     ref_code=models.CharField(max_length=12,null=True,blank=True)
