@@ -1,5 +1,3 @@
-from asyncio import trsock
-from datetime import date
 from django.db import models
 
 class Khayer(models.Model):
@@ -48,6 +46,14 @@ class TahvilgirandehSandogh(models.Model):
         ordering=['last_name','first_name']
 
 class Payment(models.Model):
+    CART='CART'
+    CASH='CASH'
+    SANDOGH='SANDOGH'
+    typechoice=[
+        (CART,'Cart'),
+        (CASH,'Cash'),
+        (SANDOGH,'Sandogh'),
+    ]
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,default=None,blank=True)
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True,default=None,blank=True)
     tahvilgirandeh_sandogh=models.ForeignKey(TahvilgirandehSandogh,on_delete=models.PROTECT,null=True,default=None,blank=True)
@@ -57,12 +63,14 @@ class Payment(models.Model):
     date=models.DateField(auto_now=True)
     '''date for last modify or create date'''
     #type   by_cart cash 
+    typee=models.CharField(max_length=7,choices=typechoice,default=CASH,null=True)
     #authority
-    #ref_code
-    #has_paid
+    ref_code=models.CharField(max_length=12,null=True,blank=True)
+    has_paid=models.CharField(max_length=12,null=True,blank=True)
+    #max_length of ref and has ??????
     card_number=models.CharField(max_length=16)
     """cart number or account number????"""
-    #bank khayer
+    khayer_bank=models.CharField(max_length=255,null=True,blank=True)
     description=models.TextField(null=True,blank=True)
     
     def __str__(self) -> str:
@@ -90,9 +98,9 @@ class Helping(models.Model):
     '''date for create date'''
 
 class Madadjo(models.Model):
-    ACTIVE='AC'
-    INACTIVE='IN'
-    UNKNOWN='NU'
+    ACTIVE='ACTIVE'
+    INACTIVE='INACTIVE'
+    UNKNOWN='NUKKNOW'
     choices_status=[
         (ACTIVE,'Active'),
         (INACTIVE,'Inactive'),
@@ -104,7 +112,7 @@ class Madadjo(models.Model):
     phone_number=models.CharField(max_length=12,null=True)
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
-    status=models.CharField(max_length=10,choices=choices_status,default=UNKNOWN)
+    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
     creating_date=models.TimeField(auto_now_add=True)
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
