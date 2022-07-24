@@ -3,13 +3,22 @@ from django.db import models
 from django_jalali.db import models as jmodels
 
 class Khayer(models.Model):
+    ACTIVE='ACTIVE'
+    INACTIVE='INACTIVE'
+    UNKNOWN='NUKKNOW'
+    choices_status=[
+        (ACTIVE,'Active'),
+        (INACTIVE,'Inactive'),
+        (UNKNOWN,'Unknown')            
+                    ]
     first_name=models.CharField(max_length=255)
     last_name=models.CharField(max_length=255)
     national_code=models.CharField(max_length=10,null=True,unique=True,blank=True)
     phone_number=models.CharField(max_length=12,null=True,blank=True)
     address=models.TextField(null=True,blank=True)
     post_code=models.CharField(max_length=10,null=True,blank=True)
-    #status active nunactive moalagh
+    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
+    
     #creating_date=models.TimeField(auto_now_add=True)
     creating_date=jmodels.jDateField(auto_now_add=True)
     #auto new add for first create
