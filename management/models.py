@@ -40,7 +40,7 @@ class SandoghKhayerieh(models.Model):
     code=models.CharField(max_length=255,unique=True)
     typee=models.CharField(max_length=8,choices=type_choices)
     status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
-    strting_date=models.TimeField(auto_now_add=True)
+    strting_date=jmodels.jDateField(auto_now_add=True)
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
         return str(self.pk)
@@ -48,9 +48,10 @@ class SandoghKhayerieh(models.Model):
         ordering=['pk']
 
 class Assign(models.Model):
-    date=models.TimeField(auto_now_add=True)
+    date=jmodels.jDateField(auto_now_add=True)
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT)
     tavilgirandeh=models.ForeignKey('TahvilgirandehSandogh',on_delete=models.PROTECT)
+    #tarikh sabt ?????
     
 class TahvilgirandehSandogh(models.Model):
     first_name=models.CharField(max_length=255,null=False)
@@ -58,7 +59,7 @@ class TahvilgirandehSandogh(models.Model):
     national_code=models.CharField(max_length=10,null=True,unique=True)
     # national code can be null?????? yes
     phone_number=models.CharField(max_length=12,null=False)
-    create_date=models.TimeField(null=False,auto_now_add=True)
+    create_date=jmodels.jDateField(null=False,auto_now_add=True)
     
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
@@ -80,7 +81,7 @@ class Payment(models.Model):
     hesab_moaseseh=models.ForeignKey('HesabMoaseseh',on_delete=models.PROTECT)
     #admin_id
     amount=models.BigIntegerField(null=False)
-    date=models.DateField(auto_now=True)
+    date=jmodels.jDateField(auto_now=True)
     '''date for last modify or create date'''
     typee=models.CharField(max_length=7,choices=typechoice,default=CASH,null=True)
     #authority
@@ -113,7 +114,7 @@ class Helping(models.Model):
     hesab_moaseseh=models.ForeignKey(HesabMoaseseh,on_delete=models.PROTECT)
     madadjo=models.ForeignKey('Madadjo',on_delete=models.PROTECT)
     amount=models.BigIntegerField()
-    date=models.DateField(auto_now=True)
+    date=jmodels.jDateField(auto_now=True)
     '''date for create date'''
 
 class Madadjo(models.Model):
@@ -132,7 +133,7 @@ class Madadjo(models.Model):
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
     status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
-    creating_date=models.TimeField(auto_now_add=True)
+    creating_date=jmodels.jDateField(auto_now_add=True)
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
     class Meta:
