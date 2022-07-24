@@ -1,4 +1,6 @@
+
 from django.db import models
+from django_jalali.db import models as jmodels
 
 class Khayer(models.Model):
     first_name=models.CharField(max_length=255,null=False)
@@ -8,7 +10,8 @@ class Khayer(models.Model):
     address=models.TextField(null=True)
     post_code=models.CharField(max_length=10,null=True)
     #status active nunactive moalagh
-    creating_date=models.TimeField(auto_now_add=True)
+    #creating_date=models.TimeField(auto_now_add=True)
+    creating_date=jmodels.jDateField(auto_now_add=True)
     #auto new add for first create
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name

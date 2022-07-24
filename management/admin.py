@@ -23,7 +23,8 @@ class AdminKhayer(admin.ModelAdmin):
                   'last_name',
                   'first_name',
                   'phone_number',
-                  'sum_of_helps'
+                  'sum_of_helps',
+                  'creating_date'
                   ]
     #list_editable=['first_name']
     #ordering=['']
