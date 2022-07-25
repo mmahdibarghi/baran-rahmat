@@ -55,7 +55,7 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
         if hesab_moaseseh.Pay != None and hesab_moaseseh.Recive !=None:
             return hesab_moaseseh.Recive -hesab_moaseseh.Pay
         if hesab_moaseseh.Pay == None:
-            return hesab_moaseseh.Recive
+            return (-1)*hesab_moaseseh.Recive
         return hesab_moaseseh.Pay
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
