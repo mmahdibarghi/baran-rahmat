@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3a5f69d1090332d3ecff00ce676ea596307ff8d291797f53cea00c612e787a64"
+            "sha256": "19e5fa7149c4bbddfd23e690b6b38ab082765f1010dade419a89e9d131d26648"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,22 +33,13 @@
             "version": "==4.0.6"
         },
         "django-jalali": {
-            "extras": [
-                "drf"
-            ],
+            "extras": [],
             "hashes": [
                 "sha256:793d61c013f31f4b81e513e73c3cc13b018ecdc44ea10dfb9789bd55d406750a",
                 "sha256:795fabc2d9a3db93de843d00b1cf931b3bd40e5fa4532c386d1772abb69f6d9e"
             ],
             "index": "pypi",
             "version": "==6.0.0"
-        },
-        "djangorestframework": {
-            "hashes": [
-                "sha256:0c33407ce23acc68eca2a6e46424b008c9c02eceb8cf18581921d0092bc1f2ee",
-                "sha256:24c4bf58ed7e85d1fe4ba250ab2da926d263cd57d64b03e8dcef0ac683f8b1aa"
-            ],
-            "version": "==3.13.1"
         },
         "jdatetime": {
             "hashes": [
@@ -70,13 +61,6 @@
             ],
             "index": "pypi",
             "version": "==2.1.1"
-        },
-        "pytz": {
-            "hashes": [
-                "sha256:1e760e2fe6a8163bc0b3d9a19c4f84342afa0a2affebfaa84b01b978a02ecaa7",
-                "sha256:e68985985296d9a66a881eb3193b0906246245294a881e7c8afe623866ac6a5c"
-            ],
-            "version": "==2022.1"
         },
         "sqlparse": {
             "hashes": [

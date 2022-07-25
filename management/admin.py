@@ -14,6 +14,13 @@ class AdminPayment(admin.ModelAdmin):
                   'date'
                   ]
     #list_editable=['date']
+    list_filter=[
+        'id',
+        'date',
+        'khayer',
+        'sandogh_khayerieh',
+        'tahvilgirandeh_sandogh',
+                ]
     ordering=['date']
     list_per_page=15
 
@@ -45,11 +52,17 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
                   'sum_of_balance'
                   ]
     def sum_of_balance(self,hesab_moaseseh):
-        return hesab_moaseseh.sum
-    def get_queryset(self, request):# set fillter for save or pay
-
+        if hesab_moaseseh.Pay != None and hesab_moaseseh.Recive !=None:
+            return hesab_moaseseh.Recive -hesab_moaseseh.Pay
+        if hesab_moaseseh.Pay == None:
+            return hesab_moaseseh.Recive
+        return hesab_moaseseh.Pay
+    def get_queryset(self, request):
         return super().get_queryset(request).annotate(
-            sum=Sum('payment__amount')
+            
+            Recive=Sum('payment__amount'),
+            Pay=Sum('helping__amount')
+            
         )
         
     #list_editable=['']

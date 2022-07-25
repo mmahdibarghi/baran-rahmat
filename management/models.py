@@ -97,8 +97,9 @@ class Payment(models.Model):
     ref_code=models.CharField(max_length=12,null=True,blank=True)
     has_paid=models.CharField(max_length=12,null=True,blank=True)
     #max_length of ref and has ??????
-    card_number=models.CharField(max_length=16)
-    """cart number or account number????"""
+    card_number=models.CharField(max_length=16,null=True,blank=True)
+
+    #cart number or account number????
     khayer_bank=models.CharField(max_length=255,null=True,blank=True)
     description=models.TextField(null=True,blank=True)
     
