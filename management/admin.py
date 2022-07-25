@@ -13,6 +13,14 @@ class AdminPayment(admin.ModelAdmin):
                   'amount',
                   'date'
                   ]
+    search_fields=['pk',
+                  'khayer__first_name',
+                  'khayer__last_name',
+                  'sandogh_khayerieh__code',
+                  'tahvilgirandeh_sandogh__first_name',
+                  'tahvilgirandeh_sandogh__last_name',
+                  'amount',
+                  ]
     #list_editable=['date']
     list_filter=[
         'id',
@@ -127,6 +135,11 @@ class AdminSandoghKhayerieh(admin.ModelAdmin):
     list_display=['pk',
                   'khayer'
                   ]
+    search_fields=[
+        'pk',
+        'khayer__first_name',
+        'khayer__last_name',
+        ]
     #list_editable=['']
     #ordering=['']
     list_per_page=15
@@ -138,7 +151,15 @@ class AdminHelping(admin.ModelAdmin):
                   'amount',
                   'date'
                   ]
+    
+    search_fields=['madadjo__first_name',
+                   'madadjo__last_name',
+                  'hesab_moaseseh__name',
+                  'amount',
+                  'date'
+                  ]
     #list_editable=['']
+    
     ordering=['date']
     list_per_page=15
 
