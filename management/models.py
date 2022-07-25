@@ -143,7 +143,7 @@ class Madadjo(models.Model):
     address=models.TextField(null=True,blank=True)
     post_code=models.CharField(max_length=10,null=True,blank=True)
     status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
-    creating_date=jmodels.jDateField(auto_now_add=True)
+    creating_date=jmodels.jDateField()
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
     class Meta:

@@ -33,6 +33,12 @@ class AdminKhayer(admin.ModelAdmin):
                   'sum_of_helps',
                   'creating_date'
                   ]
+    search_fields=[
+        'pk',
+                  'last_name',
+                  'first_name',
+                  'phone_number',
+    ]
     #list_editable=['first_name']
     #ordering=['']
     list_per_page=15
@@ -51,6 +57,7 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
                   'cart_number',
                   'sum_of_balance'
                   ]
+    search_fields=['name']
     def sum_of_balance(self,hesab_moaseseh):
         if hesab_moaseseh.Pay != None and hesab_moaseseh.Recive !=None:
             return hesab_moaseseh.Recive -hesab_moaseseh.Pay
@@ -74,10 +81,17 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
 class AdminMadadjo(admin.ModelAdmin):
     list_display=['first_name',
                   'last_name',
-                  'national_code',
                   'status',
-                  'sum_of_helped_recived'
+                  'sum_of_helped_recived',
+                  'creating_date'
                   ]
+    search_fields=[
+                'pk',
+                'last_name',
+                'first_name',
+                'phone_number',
+                'status',
+    ]
     #list_editable=['']
     #ordering=['']
     list_per_page=15
@@ -97,6 +111,10 @@ class AdminMadadjo(admin.ModelAdmin):
 @admin.register(models.TahvilgirandehSandogh)
 class AdminTahvilgirandehSandogh(admin.ModelAdmin):
     list_display=['first_name',
+                  'last_name',
+                  'phone_number'
+                  ]
+    search_fields=['first_name',
                   'last_name',
                   'phone_number'
                   ]
