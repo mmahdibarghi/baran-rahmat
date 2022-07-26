@@ -23,3 +23,4 @@ admin.site.index_title = "به پنل مدیریت خیریه باران رحم�
 urlpatterns = [
     path('', admin.site.urls),
 ]
+

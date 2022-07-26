@@ -86,6 +86,7 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
     list_per_page=15
     
 
+
 @admin.register(models.Madadjo)
 class AdminMadadjo(admin.ModelAdmin):
     list_display=['first_name',
