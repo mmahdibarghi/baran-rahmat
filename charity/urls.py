@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-admin.site.site_header = "خیریه"
-admin.site.site_title = "UMSRA Admin Portal"
-admin.site.index_title = "Welcome to UMSRA Researcher Portal"
+admin.site.site_header = "خیریه باران رحمت"
+admin.site.site_title = "پنل مدیریت"
+admin.site.index_title = "به پنل مدیریت خیریه باران رحمت خوش آمدید"
 #change titiles
 urlpatterns = [
     path('', admin.site.urls),
