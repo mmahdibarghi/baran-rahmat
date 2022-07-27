@@ -52,15 +52,16 @@ class SandoghKhayerieh(models.Model):
     strting_date=jmodels.jDateField(auto_now_add=True)
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
-        return str(self.pk)
+        return str(self.code)
     class Meta:
         ordering=['pk']
 
 class Assign(models.Model):
-    date=jmodels.jDateField(auto_now_add=True)
+    date=jmodels.jDateField()
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT)
-    tavilgirandeh=models.ForeignKey('TahvilgirandehSandogh',on_delete=models.PROTECT)
-    #tarikh sabt ?????
+    tahvilgirandeh=models.ForeignKey('TahvilgirandehSandogh',on_delete=models.PROTECT)
+    
+    
     
 class TahvilgirandehSandogh(models.Model):
     first_name=models.CharField(max_length=255)

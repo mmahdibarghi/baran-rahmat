@@ -3,7 +3,36 @@ from django.db.models import Sum
 from django.contrib import admin
 from . import models
 # Register your models here.
-
+@admin.register(models.Assign)
+class AdminAssign(admin.ModelAdmin):
+    list_display=[
+        'sandogh_khayerieh',
+        'khayer_full_name',
+        'tahvilgirandeh',
+        'date'
+    ]
+    def khayer_full_name(self,assign:models.Assign):
+        return assign.sandogh_khayerieh.khayer.last_name+' '+assign.sandogh_khayerieh.khayer.first_name
+    
+    list_select_related=[
+        'sandogh_khayerieh',
+        'tahvilgirandeh',
+        ]
+    list_filter=[
+        'sandogh_khayerieh',
+        'tahvilgirandeh',
+        'date'
+    
+        
+    ]
+    search_fields=[
+        'sandogh_khayerieh__khayer__first_name',
+        'sandogh_khayerieh__khayer__last_name',
+        'sandogh_khayerieh__code',
+        'tahvilgirandeh__first_name',
+        'tahvilgirandeh__last_name',
+    ]
+    
 @admin.register(models.Payment)
 class AdminPayment(admin.ModelAdmin):
     list_display=['pk',
