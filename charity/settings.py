@@ -1,3 +1,4 @@
+import os
 """
 Django settings for charity project.
 
@@ -23,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-cq57ypp+p1_)ij!=+=h(h!h$2#&6m+aa-1#2%jz5&o*v@2t1y*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['37.32.9.67']
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 # Application definition
 
