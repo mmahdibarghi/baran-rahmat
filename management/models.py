@@ -46,7 +46,7 @@ class SandoghKhayerieh(models.Model):
         (INACTIVE,'Inactive'),
         (UNKNOWN,'Unknown')            
                     ]
-    code=models.CharField(max_length=255,unique=True)
+    code=models.CharField(max_length=255,primary_key=True, null=False)
     typee=models.CharField(max_length=8,choices=type_choices)
     status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
     strting_date=jmodels.jDateField(auto_now_add=True)
