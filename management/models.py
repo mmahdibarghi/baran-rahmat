@@ -5,7 +5,7 @@ from django_jalali.db import models as jmodels
 class Khayer(models.Model):
     ACTIVE='ACTIVE'
     INACTIVE='INACTIVE'
-    UNKNOWN='NUKKNOW'
+    UNKNOWN='UNKNOWN'
     choices_status=[
         (ACTIVE,'Active'),
         (INACTIVE,'Inactive'),
@@ -32,19 +32,21 @@ class SandoghKhayerieh(models.Model):
     FELEZIB='FELEZIB'
     FELEZIS='FELEZIS'
     type_choices=[
-        (PLASTICB,'PlasticBig'),
-        (PLASTICS,'PlasticBig'),
-        (FELEZIB,'FeleziBig'),
-        (FELEZIS,'FeleziSmall'),
+        (PLASTICB,'Plastic-Bozorg'),
+        (PLASTICS,'Plastic-kochak'),
+        (FELEZIB,'Felezi-Bozorg'),
+        (FELEZIS,'Felezi-kochak'),
         
     ]
     ACTIVE='ACTIVE'
     INACTIVE='INACTIVE'
-    UNKNOWN='NUKKNOW'
+    UNKNOWN='UNKNOWN'
+    ARCHIVE='ARCHIVE'
     choices_status=[
         (ACTIVE,'Active'),
         (INACTIVE,'Inactive'),
-        (UNKNOWN,'Unknown')            
+        (UNKNOWN,'Unknown'),            
+        (ARCHIVE,'Archive')            
                     ]
     code=models.CharField(max_length=255,primary_key=True, null=False)
     typee=models.CharField(max_length=8,choices=type_choices)
