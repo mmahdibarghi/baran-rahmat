@@ -22,6 +22,7 @@ class AdminPayment(admin.ModelAdmin):
                   'amount',
                   ]
     #list_editable=['date']
+    autocomplete_fields = ['khayer','sandogh_khayerieh','tahvilgirandeh_sandogh']
     list_filter=[
         'id',
         'date',
@@ -49,6 +50,7 @@ class AdminKhayer(admin.ModelAdmin):
     ]
     #list_editable=['first_name']
     #ordering=['']
+    
     list_per_page=15
 
     def sum_of_helps(self,khayer):
@@ -68,11 +70,11 @@ class AdminHesabMoaseseh(admin.ModelAdmin):
     search_fields=['name']
     def sum_of_balance(self,hesab_moaseseh):
         if hesab_moaseseh.Pay != None and hesab_moaseseh.Recive !=None:
-            return hesab_moaseseh.Recive -hesab_moaseseh.Pay
-        if hesab_moaseseh.Pay == None:
-            hesab_moaseseh.Recive = 0
-            return (-1)*hesab_moaseseh.Recive
-        return hesab_moaseseh.Pay
+            return hesab_moaseseh.Recive - hesab_moaseseh.Pay
+        elif hesab_moaseseh.Pay == None:
+            return hesab_moaseseh.Recive
+        else:
+            return (-1)*hesab_moaseseh.Pay
     def get_queryset(self, request):
         return super().get_queryset(request).annotate(
             
@@ -104,6 +106,7 @@ class AdminMadadjo(admin.ModelAdmin):
     ]
     #list_editable=['']
     #ordering=['']
+    
     list_per_page=15
     def sum_of_helped_recived(self,madadjo):
         return madadjo.sum
@@ -145,7 +148,7 @@ class AdminSandoghKhayerieh(admin.ModelAdmin):
     #list_editable=['']
     #ordering=['']
     list_per_page=15
-
+    autocomplete_fields = ['khayer']
 @admin.register(models.Helping)
 class AdminHelping(admin.ModelAdmin):
     list_display=['madadjo',
@@ -161,7 +164,7 @@ class AdminHelping(admin.ModelAdmin):
                   'date'
                   ]
     #list_editable=['']
-    
+    autocomplete_fields = ['madadjo']
     ordering=['date']
     list_per_page=15
 

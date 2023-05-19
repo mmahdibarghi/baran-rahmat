@@ -7,17 +7,18 @@ class Khayer(models.Model):
     INACTIVE='INACTIVE'
     UNKNOWN='UNKNOWN'
     choices_status=[
-        (ACTIVE,'Active'),
-        (INACTIVE,'Inactive'),
-        (UNKNOWN,'Unknown')            
+        (ACTIVE,'فعال'),
+        (INACTIVE,'غیرفعال'),
+        (UNKNOWN,'نامشخص')            
                     ]
     first_name=models.CharField(max_length=255)
     last_name=models.CharField(max_length=255)
     national_code=models.CharField(max_length=10,null=True,unique=True,blank=True)
     phone_number=models.CharField(max_length=12,null=True,blank=True)
+    home_phone_number=models.CharField(max_length=12,null=True,blank=True)
     address=models.TextField(null=True,blank=True)
     post_code=models.CharField(max_length=10,null=True,blank=True)
-    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
+    status=models.CharField(max_length=8,choices=choices_status,default=ACTIVE)
     
     #creating_date=models.TimeField(auto_now_add=True)
     creating_date=jmodels.jDateField(auto_now_add=True)
@@ -32,10 +33,10 @@ class SandoghKhayerieh(models.Model):
     FELEZIB='FELEZIB'
     FELEZIS='FELEZIS'
     type_choices=[
-        (PLASTICB,'Plastic-Bozorg'),
-        (PLASTICS,'Plastic-kochak'),
-        (FELEZIB,'Felezi-Bozorg'),
-        (FELEZIS,'Felezi-kochak'),
+        (PLASTICB,'پلاستیکی بزرگ'),
+        (PLASTICS,'پلاستیکی کوچک'),
+        (FELEZIB,'فلزی بزرگ'),
+        (FELEZIS,'فلزی کوچک'),
         
     ]
     ACTIVE='ACTIVE'
@@ -43,14 +44,14 @@ class SandoghKhayerieh(models.Model):
     UNKNOWN='UNKNOWN'
     ARCHIVE='ARCHIVE'
     choices_status=[
-        (ACTIVE,'Active'),
-        (INACTIVE,'Inactive'),
-        (UNKNOWN,'Unknown'),            
-        (ARCHIVE,'Archive')            
+        (ACTIVE,'فعال'),
+        (INACTIVE,'غیر فعال'),
+        (UNKNOWN,'مشخص'),            
+        (ARCHIVE,'آرشیو')            
                     ]
     code=models.CharField(max_length=255,primary_key=True, null=False)
     typee=models.CharField(max_length=8,choices=type_choices)
-    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
+    status=models.CharField(max_length=8,choices=choices_status,default=ACTIVE)
     strting_date=jmodels.jDateField(auto_now_add=True)
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
     def __str__(self) -> str:
@@ -82,9 +83,9 @@ class Payment(models.Model):
     CASH='CASH'
     SANDOGH='SANDOGH'
     typechoice=[
-        (CART,'Cart'),
-        (CASH,'Cash'),
-        (SANDOGH,'Sandogh'),
+        (CART,'کارت'),
+        (CASH,'پول نقد'),
+        (SANDOGH,'صندوق خیریه'),
     ]
     khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,default=None,blank=True)
     sandogh_khayerieh=models.ForeignKey(SandoghKhayerieh,on_delete=models.PROTECT,null=True,default=None,blank=True)
@@ -132,11 +133,11 @@ class Helping(models.Model):
 class Madadjo(models.Model):
     ACTIVE='ACTIVE'
     INACTIVE='INACTIVE'
-    UNKNOWN='NUKKNOW'
+    UNKNOWN='UNKNOWN'
     choices_status=[
-        (ACTIVE,'Active'),
-        (INACTIVE,'Inactive'),
-        (UNKNOWN,'Unknown')            
+        (ACTIVE,'فعال'),
+        (INACTIVE,'غیرفعال'),
+        (UNKNOWN,'نامشخص')            
                     ]
     first_name=models.CharField(max_length=255)
     last_name=models.CharField(max_length=255)
@@ -144,7 +145,7 @@ class Madadjo(models.Model):
     phone_number=models.CharField(max_length=12,null=True,blank=True)
     address=models.TextField(null=True,blank=True)
     post_code=models.CharField(max_length=10,null=True,blank=True)
-    status=models.CharField(max_length=8,choices=choices_status,default=UNKNOWN)
+    status=models.CharField(max_length=8,choices=choices_status,default=ACTIVE)
     creating_date=jmodels.jDateField()
     def __str__(self) -> str:
         return self.last_name +" "+ self.first_name
