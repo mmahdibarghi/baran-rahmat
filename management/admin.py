@@ -1,8 +1,62 @@
 from ast import Pass
 from django.db.models import Sum
 from django.contrib import admin
+from django.http import HttpResponse
 from . import models
 # Register your models here.
+import pandas as pd
+
+def export_to_excel(modeladmin, request, queryset):
+    # create a list to hold the data for the DataFrame
+    data = []
+
+    # iterate over the selected Payment objects
+    for payment in queryset:
+        # fetch the related data
+        khayer = payment.khayer.first_name + ' ' + payment.khayer.last_name if payment.khayer else None
+        sandogh_khayerieh = payment.sandogh_khayerieh.code if payment.sandogh_khayerieh else None
+        tahvilgirandeh_sandogh = payment.tahvilgirandeh_sandogh.first_name + ' ' + payment.tahvilgirandeh_sandogh.last_name if payment.tahvilgirandeh_sandogh else None
+        hesab_moaseseh = payment.hesab_moaseseh.name
+
+        # extract the year, month, and day from the date field
+        year = payment.date.year
+        month = payment.date.month
+        day = payment.date.day
+
+        # add a row of data for this Payment object
+        data.append({
+            'id': payment.id,
+            'khayer': khayer,
+            'sandogh_khayerieh': sandogh_khayerieh,
+            'tahvilgirandeh_sandogh': tahvilgirandeh_sandogh,
+            'hesab_moaseseh': hesab_moaseseh,
+            'amount': payment.amount,
+            'year': year,
+            'month': month,
+            'day': day,
+            'typee': payment.typee,
+            'authority': payment.authority,
+            'ref_code': payment.ref_code,
+            'has_paid': payment.has_paid,
+            'card_number': payment.card_number,
+            'khayer_bank': payment.khayer_bank,
+            'description': payment.description,
+        })
+
+    # create a DataFrame from the data
+    df = pd.DataFrame(data)
+
+    # create an Excel file from the DataFrame
+    with pd.ExcelWriter('payments.xlsx', engine='xlsxwriter') as writer:
+        df.to_excel(writer, sheet_name='Payments')
+
+    # serve the Excel file as a downloadable response
+    with open('payments.xlsx', 'rb') as f:
+        response = HttpResponse(f.read(), content_type='application/vnd.ms-excel')
+        response['Content-Disposition'] = 'attachment; filename=payments.xlsx'
+        return response
+
+export_to_excel.short_description = "Export selected payments to Excel"
 
 @admin.register(models.Payment)
 class AdminPayment(admin.ModelAdmin):
@@ -32,7 +86,7 @@ class AdminPayment(admin.ModelAdmin):
                 ]
     ordering=['date']
     list_per_page=15
-
+    actions = [export_to_excel]
 @admin.register(models.Khayer)
 class AdminKhayer(admin.ModelAdmin):
     list_display=['pk',
