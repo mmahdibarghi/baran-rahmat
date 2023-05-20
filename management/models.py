@@ -53,7 +53,8 @@ class SandoghKhayerieh(models.Model):
     typee=models.CharField(max_length=8,choices=type_choices)
     status=models.CharField(max_length=8,choices=choices_status,default=ACTIVE)
     strting_date=jmodels.jDateField(auto_now_add=True)
-    khayer=models.ForeignKey(Khayer,on_delete=models.PROTECT,null=True,blank=True)
+    khayer = models.ForeignKey(Khayer, on_delete=models.PROTECT, null=True, blank=True, related_name='sandoghkhayeriehs')
+    khayer_ghabli = models.ForeignKey(Khayer, on_delete=models.PROTECT, null=True, blank=True, related_name='last_sandoghkhayeriehs')
     def __str__(self) -> str:
         return str(self.pk)
     class Meta:

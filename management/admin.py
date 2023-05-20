@@ -97,6 +97,7 @@ class AdminMadadjo(admin.ModelAdmin):
                   'sum_of_helped_recived',
                   'creating_date'
                   ]
+    
     search_fields=[
                 'pk',
                 'last_name',
@@ -104,8 +105,7 @@ class AdminMadadjo(admin.ModelAdmin):
                 'phone_number',
                 'status',
     ]
-    #list_editable=['']
-    #ordering=['']
+
     
     list_per_page=15
     def sum_of_helped_recived(self,madadjo):
@@ -148,7 +148,7 @@ class AdminSandoghKhayerieh(admin.ModelAdmin):
     #list_editable=['']
     #ordering=['']
     list_per_page=15
-    autocomplete_fields = ['khayer']
+    autocomplete_fields = ['khayer','khayer_ghabli']
 @admin.register(models.Helping)
 class AdminHelping(admin.ModelAdmin):
     list_display=['madadjo',
